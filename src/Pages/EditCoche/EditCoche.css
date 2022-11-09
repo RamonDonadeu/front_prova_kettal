@@ -1,0 +1,58 @@
+.editCoche {
+  padding: 2rem;
+}
+
+.editCoche--header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.editCoche--title {
+  font-size: 2rem;
+  margin: auto;
+  padding-bottom: 2rem;
+}
+
+form {
+  width: 40%;
+  margin: auto;
+}
+
+.formItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 2rem;
+  padding-bottom: 0.3rem;
+}
+
+.formItem label {
+  padding-bottom: 0.2rem;
+  text-align: start;
+  margin: 0;
+  padding: 0;
+}
+
+.formItem input {
+  text-align: start;
+  height: 1.5rem;
+}
+
+.formItem select {
+  text-align: start;
+  height: 1.75rem;
+}
+
+.formCheckbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 1rem;
+  align-items: center;
+  padding-bottom: 0;
+}
+
+.formCheckbox label {
+  padding-bottom: 0.4;
+}

@@ -1,0 +1,15 @@
+.createCoche {
+  padding: 2rem;
+}
+
+.createCoche--header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.createCoche--title {
+  font-size: 2rem;
+  margin: auto;
+  padding-bottom: 2rem;
+}

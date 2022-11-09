@@ -71,7 +71,7 @@ const CochesList = () => {
                 <th className="cochesList--header">Disponible</th>
                 <th
                   className="cochesList--header"
-                  style={{ "text-align": "center", "padding-left": 0 }}
+                  style={{ textAlign: "center", paddingLeft: 0 }}
                 >
                   Acción
                 </th>

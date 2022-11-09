@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import EditCoche from "../EditCoche/EditCoche";
 import "./CochesList.css";
 
 const CochesList = () => {
@@ -7,22 +9,18 @@ const CochesList = () => {
   const [find, setFind] = useState("");
 
   function containsFind(coche) {
-    console.log(coche, find);
-    if (
-      coche.marca.includes(find) ||
-      coche.modelo.includes(find) ||
-      find === ""
-    ) {
+    const marca = coche.marca.toLowerCase();
+    const modelo = coche.modelo.toLowerCase();
+    if (marca.includes(find) || modelo.includes(find) || find === "") {
       return coche;
     }
   }
 
-  useEffect(() => {
+  function getCoches() {
     axios.get("api/coches").then((res) => {
       let coches = res.data.data;
       let list = [];
       coches = coches.filter(containsFind);
-      console.log(coches);
       coches.forEach((coche) => {
         list.push(
           <tr className="cochesList--item" key={coche.id}>
@@ -32,12 +30,24 @@ const CochesList = () => {
             <td>{coche.cantidad}</td>
             <td>{coche.precio} €</td>
             <td>{coche.disponible === true ? "Si" : "No"}</td>
-            <td>Accion</td>
+            <td className="item--edit">
+              <Link to={"/edit/" + coche.id}>
+                {" "}
+                <img
+                  src={require("../../assets/svg/edit.svg").default}
+                  alt=""
+                />
+              </Link>
+            </td>
           </tr>
         );
       });
       setCochesList(list);
     });
+  }
+
+  useEffect(() => {
+    getCoches();
   }, [find]);
 
   return (
@@ -48,7 +58,7 @@ const CochesList = () => {
           type="text"
           placeholder="Find..."
           onChange={(e) => {
-            setFind(e.target.value);
+            setFind(e.target.value.toLowerCase());
           }}
         />
         <div className="cochesList--list">
@@ -59,7 +69,12 @@ const CochesList = () => {
                 <th className="cochesList--header">Cantidad</th>
                 <th className="cochesList--header">Precio</th>
                 <th className="cochesList--header">Disponible</th>
-                <th className="cochesList--header">Accion</th>
+                <th
+                  className="cochesList--header"
+                  style={{ "text-align": "center", "padding-left": 0 }}
+                >
+                  Acción
+                </th>
               </tr>
             </thead>
             <tbody>{cochesList}</tbody>

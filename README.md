@@ -1,4 +1,4 @@
-# Kettal Exercice
+# Kettal Exercise
 
 Frontend para la prueba tecnica de Kettal
 

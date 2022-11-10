@@ -5,7 +5,7 @@ import "./CreateCoche.css";
 import showMessage from "../../Helper/Message/showMessage";
 
 const CreateCoche = () => {
-  const coche = { disponible: false };
+  const coche = { disponible: false, color: "Rojo" };
   const navigate = useNavigate();
 
   const validateSubmit = async (event) => {

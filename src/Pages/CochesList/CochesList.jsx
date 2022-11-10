@@ -73,7 +73,12 @@ const CochesList = () => {
                 <th className="cochesList__header">Marca</th>
                 <th className="cochesList__header">Cantidad</th>
                 <th className="cochesList__header">Precio</th>
-                <th className="cochesList__header">Disponible</th>
+                <th
+                  className="cochesList__header"
+                  style={{ textAlign: "center", paddingLeft: 0 }}
+                >
+                  Disponible
+                </th>
                 <th
                   className="cochesList__header"
                   style={{ textAlign: "center", paddingLeft: 0 }}

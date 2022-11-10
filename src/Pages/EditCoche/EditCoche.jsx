@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import "./EditCoche.css";
 import showMessage from "../../Helper/Message/showMessage";
+import Checkbox from "../../Components/Checkbox/Checkbox";
 
 const EditCoche = (props) => {
   const [coche, setCoche] = useState({});
+  const [checked, setChecked] = useState();
+  const [showModal, setShowModal] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -21,14 +24,14 @@ const EditCoche = (props) => {
         .catch((error) => {
           showMessage(error.response.data.data.error);
         });
-    } catch (error) {
-      console.log("Ei");
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
     axios.get("/api/coches/" + params.id).then((res) => {
       setCoche(res.data.data[0]);
+      console.log(res.data.data[0].disponible);
+      setChecked(res.data.data[0].disponible);
     });
   }, []);
 
@@ -41,8 +44,67 @@ const EditCoche = (props) => {
             alt=""
             className="back__icon"
           />
-          <div className="back__text">Atras</div>
         </Link>
+        <div className="editCoche__delete">
+          <div
+            className="delete__button"
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            <img
+              src={require("../../assets/svg/delete.svg").default}
+              alt=""
+              className="delete__icon"
+            />
+          </div>
+          {showModal ? (
+            <div className="delete__popup">
+              <div className="disableBackground"></div>
+              <div className="popup__content">
+                <div className="popup__header">
+                  <img
+                    src={require("../../assets/svg/close.svg").default}
+                    alt=""
+                    className="delete__icon"
+                    onClick={() => {
+                      setShowModal(false);
+                    }}
+                  />
+                </div>
+                <div className="popup__text">
+                  ¿Seguro que quieres elminar este coche?
+                </div>
+                <div className="popup__buttons">
+                  <button
+                    className="cancelar"
+                    onClick={() => {
+                      setShowModal(false);
+                    }}
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    className="confirmar"
+                    onClick={() => {
+                      axios
+                        .delete("api/coches/" + params.id)
+                        .then((res) => {
+                          navigate("/");
+                          showMessage("Coche eliminado con exito");
+                        })
+                        .catch((error) => {
+                          showMessage(error.response.data.data.error);
+                        });
+                    }}
+                  >
+                    Confirmar
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
       </div>
       <form action="" onSubmit={validateSubmit}>
         <div className="editCoche__title">
@@ -95,15 +157,30 @@ const EditCoche = (props) => {
         </div>{" "}
         <div className="formItem formCheckbox">
           <label>Disponible:</label>
-          <input
-            required={true}
-            type="Checkbox"
-            checked={coche.disponible === true ? true : false}
-            onChange={(e) => {
-              coche.disponible = e.target.value;
+          <div
+            className="checkbox"
+            onClick={() => {
+              setChecked(!checked);
+              coche.disponible = !checked;
               setCoche(coche);
             }}
-          ></input>
+          >
+            {checked ? (
+              <div className="selected">
+                <img
+                  src={require("../../assets/svg/check_selected.svg").default}
+                  alt=""
+                />
+              </div>
+            ) : (
+              <div className="unselected">
+                <img
+                  src={require("../../assets/svg/check_empty.svg").default}
+                  alt=""
+                />
+              </div>
+            )}
+          </div>
         </div>{" "}
         <div className="formItem">
           <label>Cantidad:</label>

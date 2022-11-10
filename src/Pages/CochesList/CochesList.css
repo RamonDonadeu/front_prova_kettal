@@ -91,7 +91,7 @@ thead tr:hover {
   margin: auto;
 }
 
-.cochesList__create{
+.cochesList__create {
   width: 80%;
   margin: auto;
   display: flex;
@@ -104,11 +104,11 @@ thead tr:hover {
   padding-inline: 2rem;
 }
 
-.cochesList__create:hover > .create__icon{
+.cochesList__create:hover > .create__icon {
   transform: rotate(180deg);
 }
 
-.create__icon{
+.create__icon {
   height: 2rem;
   width: 2rem;
   transition: 0.6s ease;

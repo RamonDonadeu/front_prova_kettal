@@ -1,0 +1,20 @@
+.checkbox__td {
+  padding: 0;
+}
+.checkbox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+  height: 100%;
+}
+
+.checkbox > div {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox img {
+  height: 1.5rem;
+}

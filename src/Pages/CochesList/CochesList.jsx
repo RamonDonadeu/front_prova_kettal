@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Checkbox from "../../Components/Checkbox/Checkbox";
 import EditCoche from "../EditCoche/EditCoche";
 import "./CochesList.css";
 
@@ -23,6 +24,7 @@ const CochesList = () => {
       let list = [];
       coches = coches.filter(containsFind);
       coches.forEach((coche) => {
+        const disponible = coche.disponible;
         list.push(
           <tr className="cochesList__item" key={coche.id}>
             <td>
@@ -30,7 +32,9 @@ const CochesList = () => {
             </td>
             <td>{coche.cantidad}</td>
             <td>{coche.precio} €</td>
-            <td>{coche.disponible === true ? "Si" : "No"}</td>
+            <td className="checkbox__td">
+              <Checkbox default={disponible} coche={coche}></Checkbox>
+            </td>
             <td className="item__edit">
               <Link to={"/edit/" + coche.id}>
                 {" "}

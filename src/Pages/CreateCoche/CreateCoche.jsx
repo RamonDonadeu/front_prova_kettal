@@ -33,7 +33,6 @@ const CreateCoche = () => {
             alt=""
             className="back__icon"
           />
-          <div className="back__text">Atras</div>
         </Link>
       </div>
       <form action="" onSubmit={validateSubmit}>
@@ -76,7 +75,7 @@ const CreateCoche = () => {
           <input
             type="Checkbox"
             onChange={(e) => {
-              coche.disponible = e.target.value;
+              coche.disponible = e.target.checked;
             }}
           ></input>
         </div>{" "}
@@ -88,9 +87,7 @@ const CreateCoche = () => {
             max="10000"
             min="0"
             onChange={(e) => {
-              console.log(coche);
-              coche.cantidad = e.target.checked;
-              console.log(coche);
+              coche.cantidad = e.target.value;
             }}
           ></input>
         </div>{" "}
@@ -115,7 +112,8 @@ const CreateCoche = () => {
             name="datemin"
             min="2000-01-01"
             onChange={(e) => {
-              coche.fechaCreacion = e.target.value;
+              coche.fechaCreacion = e.target.value + "T00:00.000Z";
+              console.log(e.target.value);
             }}
           ></input>
         </div>

@@ -1,18 +1,43 @@
+import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CreateCoche.css";
+import showMessage from "../../Helper/Message/showMessage";
 
 const CreateCoche = () => {
-  const coche = {};
+  const coche = { disponible: false };
+  const navigate = useNavigate();
+
+  const validateSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      axios
+        .post("/api/coches", coche)
+        .then((res) => {
+          navigate("/");
+          showMessage("Coche creado con exito");
+        })
+        .catch((error) => {
+          console.log(error);
+          showMessage(error.response.data.data.error);
+        });
+    } catch (error) {}
+  };
+
   return (
     <div className="createCoche">
-      <div className="createCoche--header">
-        <Link className="createCoche--back" to="/">
-          Atras
+      <div className="createCoche__header">
+        <Link className="createCoche__back" to="/">
+          <img
+            src={require("../../assets/svg/back.svg").default}
+            alt=""
+            className="back__icon"
+          />
+          <div className="back__text">Atras</div>
         </Link>
       </div>
-      <form action="">
-        <div className="createCoche--title">Crear coche</div>
+      <form action="" onSubmit={validateSubmit}>
+        <div className="createCoche__title">Crear coche</div>
         <div className="formItem">
           <label>Marca:</label>
           <input
@@ -34,7 +59,9 @@ const CreateCoche = () => {
         <div className="formItem">
           <label>Color:</label>
           <select
+            value="-1"
             onChange={(e) => {
+              console.log("Ei");
               coche.color = e.target.value;
             }}
           >
@@ -47,7 +74,6 @@ const CreateCoche = () => {
         <div className="formItem formCheckbox">
           <label>Disponible:</label>
           <input
-            required={true}
             type="Checkbox"
             onChange={(e) => {
               coche.disponible = e.target.value;
@@ -62,7 +88,9 @@ const CreateCoche = () => {
             max="10000"
             min="0"
             onChange={(e) => {
-              coche.cantidad = e.target.value;
+              console.log(coche);
+              coche.cantidad = e.target.checked;
+              console.log(coche);
             }}
           ></input>
         </div>{" "}
@@ -87,7 +115,7 @@ const CreateCoche = () => {
             name="datemin"
             min="2000-01-01"
             onChange={(e) => {
-              coche.fechacreacion = e.target.value;
+              coche.fechaCreacion = e.target.value;
             }}
           ></input>
         </div>

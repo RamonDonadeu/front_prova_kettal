@@ -2,20 +2,43 @@
   padding: 2rem;
 }
 
-.editCoche--header {
+.editCoche__header {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.editCoche--title {
+.editCoche__title {
   font-size: 2rem;
   margin: auto;
   padding-bottom: 2rem;
 }
 
+.editCoche__back{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.editCoche__back:hover > .back__icon{
+  left: -10%;
+}
+
+.back__icon{
+  height: 2rem;
+  position: relative;
+  left: 0;
+  transition: 0.3s;
+}
+
+.back__text{
+  padding-left: 1rem;
+  font-size: 1.5rem;
+
+}
+
 form {
-  width: 40%;
+  width: 25%;
   margin: auto;
 }
 

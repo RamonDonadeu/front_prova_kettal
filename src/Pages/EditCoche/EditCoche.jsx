@@ -1,13 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "./EditCoche.css";
+import showMessage from "../../Helper/Message/showMessage";
 
 const EditCoche = (props) => {
   const [coche, setCoche] = useState({});
   const params = useParams();
+  const navigate = useNavigate();
 
-  function handleSubmit(event) {}
+  const validateSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      axios
+        .put("/api/coches/" + params.id, coche)
+        .then((res) => {
+          navigate("/");
+          showMessage("Coche editado con exito");
+        })
+        .catch((error) => {
+          showMessage(error.response.data.data.error);
+        });
+    } catch (error) {
+      console.log("Ei");
+    }
+  };
 
   useEffect(() => {
     axios.get("/api/coches/" + params.id).then((res) => {
@@ -17,13 +34,18 @@ const EditCoche = (props) => {
 
   return (
     <div className="editCoche">
-      <div className="editCoche--header">
-        <Link className="editCoche--back" to="/">
-          Atras
+      <div className="editCoche__header">
+        <Link className="editCoche__back" to="/">
+          <img
+            src={require("../../assets/svg/back.svg").default}
+            alt=""
+            className="back__icon"
+          />
+          <div className="back__text">Atras</div>
         </Link>
       </div>
-      <form action="" onSubmit={handleSubmit()}>
-        <div className="editCoche--title">
+      <form action="" onSubmit={validateSubmit}>
+        <div className="editCoche__title">
           Editando {coche.marca} {coche.modelo}
         </div>
         <div className="formItem">

@@ -2,14 +2,25 @@
   padding: 2rem;
 }
 
-.createCoche--header {
+.createCoche__header {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.createCoche--title {
+.createCoche__title {
   font-size: 2rem;
   margin: auto;
   padding-bottom: 2rem;
+}
+
+.createCoche__back{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.createCoche__back:hover > .back__icon{
+  left: -10%;
 }
